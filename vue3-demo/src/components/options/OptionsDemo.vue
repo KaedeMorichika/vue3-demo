@@ -2,16 +2,13 @@
     <div style="margin: 50px">
         <div style="width: 1000px; display: flex; justify-content: space-between; padding: 10px;">
             <div>
-                <span>縦：</span>
-                <input v-model="rowNum">
+                <span>縦：</span><input v-model="rowNum" :disabled="isGaming">
             </div>
             <div>
-                <span>横：</span>
-                <input v-model="columnNum">
+                <span>横：</span><input v-model="columnNum" :disabled="isGaming">
             </div>
             <div>
-                <span>エイムサイズ：</span>
-                <input v-model="aimSize">
+                <span>エイムサイズ：</span><input v-model="aimSize" :disabled="isGaming">
             </div>
             <div>
                 <button @click="gameStart">スタート！</button>
@@ -61,9 +58,11 @@ export default {
             this.markedTarget = this.generateMarkedTarget()
         },
         game () {
+            // const gameTime = 60000
+            const gameTime = 5000
             setTimeout(() => {
                 this.endGame()
-            }, 60000)
+            }, gameTime)
         },
         endGame () {
             this.isGaming = false
