@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  vue:
+    container_name: vue
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - '../:/var/www/html'
+      - node_modules_volume:/var/www/html/vue3-demo/node_modules
+    tty: true
+
+volumes:
+  node_modules_volume: {}
