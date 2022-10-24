@@ -1,14 +1,35 @@
 <template>
     <div style="margin: 50px">
+        <div style="width: 1000px; display: flex; justify-content: space-between; padding: 10px;">
+            <div>
+                <span>縦：</span>
+                <input v-model="rowNum">
+            </div>
+            <div>
+                <span>横：</span>
+                <input v-model="columnNum">
+            </div>
+            <div>
+                <span>エイムサイズ：</span>
+                <input v-model="aimSize">
+            </div>
+            <div>
+                <button @click="gameStart">スタート！</button>
+            </div>
+        </div>
         <div style="display: flex; flex-direction: row;">
-            <div v-for="i in rowNum" :key="i" style="display: flex; flex-direction: column">
+            <div v-for="i in parseInt(rowNum)" :key="i" style="display: flex; flex-direction: column">
                 <AimTarget
-                    v-for="j in rowNum" :key="j"
+                    v-for="j in parseInt(columnNum)" :key="j"
                     :row-index="i - 1" :column-index="j - 1"
+                    :size="aimSize"
                     :marked="isMarkedTarget(i - 1, j - 1)"
                     @click="onButtonClick(i - 1, j - 1)"
                 ></AimTarget>
             </div>
+        </div>
+        <div v-show="!isGaming && score !== 0">
+            スコア：{{score}}
         </div>
     </div>
 </template>
@@ -19,30 +40,44 @@ import AimTarget from "@/components/options/AimTarget.vue";
 export default {
     name: "OptionsDemo",
     components: {AimTarget},
-    props: {
-        columnNum: {
-            type: Number,
-            default: 6
-        },
-        rowNum: {
-            type: Number,
-            default: 6
-        }
-    },
     data () {
         return {
-            markedTarget: this.generateMarkedTarget()
+            columnNum: 6,
+            rowNum: 6,
+            aimSize: '100px',
+            markedTarget: null,
+            score: 0,
+            isGaming: false
         }
     },
     methods: {
+        gameStart () {
+            this.initGame()
+            this.game()
+        },
+        initGame () {
+            this.score = 0
+            this.isGaming = true
+            this.markedTarget = this.generateMarkedTarget()
+        },
+        game () {
+            setTimeout(() => {
+                this.endGame()
+            }, 60000)
+        },
+        endGame () {
+            this.isGaming = false
+            this.markedTarget = null
+        },
         generateMarkedTarget() {
             return {
-                column: this._getRandomInt(this.rowNum - 1),
-                row: this._getRandomInt(this.columnNum - 1)
+                row: this._getRandomInt(this.columnNum - 1),
+                column: this._getRandomInt(this.rowNum - 1)
             }
         },
         onButtonClick (row, column) {
             if (this.isMarkedTarget(row, column)) {
+                this.score++
                 this.markedTarget = this.generateMarkedTarget()
             }
         },
@@ -50,7 +85,11 @@ export default {
             return Math.floor(Math.random() * max);
         },
         isMarkedTarget (row, column) {
-            return row === this.markedTarget.row && column === this.markedTarget.column
+            if (this.markedTarget) {
+                return row === this.markedTarget.row && column === this.markedTarget.column
+            } else {
+                return false
+            }
         },
     }
 }

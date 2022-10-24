@@ -1,5 +1,5 @@
 <template>
-    <div class="target">
+    <div class="target" :style="{width: size, height: size}">
         <button :class="{marked: marked}" style="width: 100%; height: 100%" @click="onButtonClick"></button>
     </div>
 </template>
@@ -8,6 +8,10 @@
 export default {
     name: "AimTarget",
     props: {
+        size: {
+            type: String,
+            default: '100px'
+        },
         rowIndex: {
             type: Number,
             required: true
@@ -34,8 +38,6 @@ export default {
 
 <style scoped>
 .target {
-    width: 100px;
-    height: 100px;
     border: 1px solid black;
 }
 .target button {
