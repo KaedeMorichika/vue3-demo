@@ -92,6 +92,24 @@ export default {
                 return false
             }
         }
+    },
+    computed: {
+        bindColumnNum: {
+            get () {
+                return this.setting.columnNum.toString()
+            },
+            set (val) {
+                this.setting.columnNum = parseInt(val)
+            }
+        },
+        bindRowNum: {
+            get () {
+                return this.setting.rowNum.toString()
+            },
+            set (val) {
+                this.setting.rowNum = parseInt(val)
+            }
+        }
     }
 }
 </script>
