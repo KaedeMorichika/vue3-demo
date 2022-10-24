@@ -2,10 +2,10 @@
     <div style="margin: 50px">
         <div style="width: 1000px; display: flex; justify-content: space-between; padding: 10px;">
             <div>
-                <span>縦：</span><input v-model="setting.rowNum">
+                <span>縦：</span><input v-model="bindRowNum">
             </div>
             <div>
-                <span>横：</span><input v-model="setting.columnNum">
+                <span>横：</span><input v-model="bindColumnNum">
             </div>
             <div>
                 <span>エイムサイズ：</span><input v-model="setting.aimSize">

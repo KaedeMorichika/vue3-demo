@@ -1,6 +1,5 @@
 import {ref} from "vue";
 import {getRandomInt} from "@/utils/utils.js";
-import {re} from "@babel/core/lib/vendor/import-meta-resolve";
 
 const useGameStatus = (setting) => {
     const gameStatus = {
