@@ -11,10 +11,10 @@
                 <span>エイムサイズ：</span><input v-model="setting.aimSize" :disabled="gameStatus.isGaming">
             </div>
             <div>
-                <button @click="gameStart">スタート！</button>
+                <button @click="game">スタート！</button>
             </div>
         </div>
-        <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row; justify-content: center">
             <div v-for="i in parseInt(setting.rowNum)" :key="i" style="display: flex; flex-direction: column">
                 <AimTarget
                     v-for="j in parseInt(setting.columnNum)" :key="j"
@@ -46,16 +46,13 @@ export default {
                 aimSize: '100px'
             },
             gameStatus: {
+                isGaming: false,
                 markedTarget: null,
-                score: 0,
-                isGaming: false
+                score: 0
             }
         }
     },
     methods: {
-        gameStart () {
-            this.game()
-        },
         game () {
             const gameTime = 5000
             this.initGame()

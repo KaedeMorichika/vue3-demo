@@ -43,6 +43,9 @@ export default {
 .target button {
     background-color: white;
 }
+.target button:hover {
+    cursor: crosshair;
+}
 .target button.marked {
     background-color: crimson;
 }

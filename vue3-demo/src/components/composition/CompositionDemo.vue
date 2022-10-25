@@ -8,13 +8,13 @@
                 <span>横：</span><input v-model="bindColumnNum" :disabled="gameStatus.isGaming.value">
             </div>
             <div>
-                <span>エイムサイズ：</span><input v-model="setting.aimSize" :disabled="gameStatus.isGaming.value">
+                <span>エイムサイズ：</span><input v-model="setting.aimSize.value" :disabled="gameStatus.isGaming.value">
             </div>
             <div>
                 <button @click="game">スタート！</button>
             </div>
         </div>
-        <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row; justify-content: center">
             <div v-for="i in parseInt(setting.rowNum.value)" :key="i" style="display: flex; flex-direction: column">
                 <AimTarget
                     v-for="j in parseInt(setting.columnNum.value)" :key="j"
@@ -41,7 +41,9 @@ export default {
     components: {AimTarget},
     setup () {
         const {setting, bindRowNum, bindColumnNum}  = useGameSetting()
+
         const {gameStatus, game, hit, isMarkedTarget} = useGameStatus(setting)
+
         return {
             setting, bindRowNum, bindColumnNum,
             gameStatus, game, hit, isMarkedTarget
