@@ -2,13 +2,13 @@
     <div style="margin: 50px">
         <div style="width: 1000px; display: flex; justify-content: space-between; padding: 10px;">
             <div>
-                <span>縦：</span><input v-model="bindRowNum">
+                <span>縦：</span><input v-model="bindRowNum" :disabled="gameStatus.isGaming.value">
             </div>
             <div>
-                <span>横：</span><input v-model="bindColumnNum">
+                <span>横：</span><input v-model="bindColumnNum" :disabled="gameStatus.isGaming.value">
             </div>
             <div>
-                <span>エイムサイズ：</span><input v-model="setting.aimSize">
+                <span>エイムサイズ：</span><input v-model="setting.aimSize" :disabled="gameStatus.isGaming.value">
             </div>
             <div>
                 <button @click="game">スタート！</button>
@@ -42,7 +42,10 @@ export default {
     setup () {
         const {setting, bindRowNum, bindColumnNum}  = useGameSetting()
         const {gameStatus, game, hit, isMarkedTarget} = useGameStatus(setting)
-        return {setting, gameStatus, bindRowNum, bindColumnNum, game, hit, isMarkedTarget}
+        return {
+            setting, bindRowNum, bindColumnNum,
+            gameStatus, game, hit, isMarkedTarget
+        }
     }
 }
 </script>

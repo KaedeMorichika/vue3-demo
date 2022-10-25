@@ -21,7 +21,7 @@
                     :row-index="i - 1" :column-index="j - 1"
                     :size="setting.aimSize"
                     :marked="isMarkedTarget(i - 1, j - 1)"
-                    @click="onButtonClick(i - 1, j - 1)"
+                    @click="hit(i - 1, j - 1)"
                 ></AimTarget>
             </div>
         </div>
@@ -54,20 +54,19 @@ export default {
     },
     methods: {
         gameStart () {
-            this.initGame()
             this.game()
+        },
+        game () {
+            const gameTime = 5000
+            this.initGame()
+            setTimeout(() => {
+                this.endGame()
+            }, gameTime)
         },
         initGame () {
             this.gameStatus.score = 0
             this.gameStatus.isGaming = true
             this.gameStatus.markedTarget = this.generateMarkedTarget()
-        },
-        game () {
-            // const gameTime = 60000
-            const gameTime = 5000
-            setTimeout(() => {
-                this.endGame()
-            }, gameTime)
         },
         endGame () {
             this.gameStatus.isGaming = false
@@ -79,7 +78,7 @@ export default {
                 column: getRandomInt(this.setting.rowNum - 1)
             }
         },
-        onButtonClick (row, column) {
+        hit (row, column) {
             if (this.isMarkedTarget(row, column)) {
                 this.gameStatus.score++
                 this.gameStatus.markedTarget = this.generateMarkedTarget()
