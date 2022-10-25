@@ -7,12 +7,12 @@ export const useGameSetting = () => {
         aimSize: '100px'
     }
     const bindRowNum = computed({
-        get () { return setting.rowNum.toString()},
-        set (val) { return setting.rowNum = parseInt(val) }
+        get: () => setting.rowNum.value.toString(),
+        set: (val) => setting.rowNum.value = parseInt(val)
     })
     const bindColumnNum = computed({
-        get () { return setting.columnNum.toString()},
-        set (val) { return setting.columnNum = parseInt(val) }
+        get: () => setting.columnNum.value.toString(),
+        set: (val) => setting.columnNum.value = parseInt(val)
     })
     return {setting, bindRowNum, bindColumnNum}
 }

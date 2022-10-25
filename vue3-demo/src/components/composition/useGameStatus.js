@@ -9,18 +9,18 @@ const useGameStatus = (setting) => {
     }
     const _generateMarkedTarget = () => {
         return {
-            row: getRandomInt(setting.rowNum - 1),
-            column: getRandomInt(setting.columnNum - 1)
+            row: getRandomInt(setting.rowNum.value - 1),
+            column: getRandomInt(setting.columnNum.value - 1)
         }
     }
     const _initGame = () => {
-        gameStatus.score = 0
-        gameStatus.isGaming = true
-        gameStatus.markedTarget = _generateMarkedTarget()
+        gameStatus.score.value = 0
+        gameStatus.isGaming.value = true
+        gameStatus.markedTarget.value = _generateMarkedTarget()
     }
     const _endGame = () => {
-        gameStatus.isGaming = false
-        gameStatus.markedTarget = null
+        gameStatus.isGaming.value = false
+        gameStatus.markedTarget.value = null
     }
     const game = () => {
         const gameTime = 5000
@@ -30,16 +30,16 @@ const useGameStatus = (setting) => {
         }, gameTime)
     }
     const isMarkedTarget = (row, column) => {
-        if (gameStatus.markedTarget) {
-            return row === gameStatus.markedTarget.row && column === gameStatus.markedTarget.column
+        if (gameStatus.markedTarget.value) {
+            return row === gameStatus.markedTarget.value.row && column === gameStatus.markedTarget.value.column
         } else {
             return false
         }
     }
     const hit = (row, column) => {
         if (isMarkedTarget(row, column)) {
-            gameStatus.score++
-            gameStatus.markedTarget = _generateMarkedTarget()
+            gameStatus.score.value++
+            gameStatus.markedTarget.value = _generateMarkedTarget()
         }
     }
 

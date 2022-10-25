@@ -1,15 +1,16 @@
 <template>
     <div>
         <label>
-            <input type="radio" v-model="apiSwitch" value="0">
+            <input type="radio" v-model="apiSwitch" value="options">
             <span>OptionsApi</span>
         </label>
         <label>
-            <input type="radio" v-model="apiSwitch" value="1">
+            <input type="radio" v-model="apiSwitch" value="composition">
             <span>CompositionApi</span>
         </label>
-        <OptionsDemo v-show="parseInt(apiSwitch) === 0"></OptionsDemo>
-        <CompositionDemo v-show="parseInt(apiSwitch) === 1"></CompositionDemo>
+        <h3>{{ apiSwitch }}</h3>
+        <OptionsDemo v-show="apiSwitch === 'options'"></OptionsDemo>
+        <CompositionDemo v-show="apiSwitch === 'composition'"></CompositionDemo>
     </div>
 </template>
 
@@ -21,7 +22,7 @@ export default {
   name: 'App',
   data () {
     return {
-      apiSwitch: 0
+      apiSwitch: 'options'
     }
   },
   components: {

@@ -14,20 +14,20 @@
                 <button @click="game">スタート！</button>
             </div>
         </div>
-    </div>
-    <div style="display: flex; flex-direction: row;">
-        <div v-for="i in parseInt(setting.rowNum)" :key="i" style="display: flex; flex-direction: column">
-            <AimTarget
-                v-for="j in parseInt(setting.columnNum)" :key="j"
-                :row-index="i - 1" :column-index="j - 1"
-                :size="setting.aimSize"
-                :marked="isMarkedTarget(i - 1, j - 1)"
-                @click="hit(i - 1, j - 1)"
-            ></AimTarget>
+        <div style="display: flex; flex-direction: row;">
+            <div v-for="i in parseInt(setting.rowNum.value)" :key="i" style="display: flex; flex-direction: column">
+                <AimTarget
+                    v-for="j in parseInt(setting.columnNum.value)" :key="j"
+                    :row-index="i - 1" :column-index="j - 1"
+                    :size="setting.aimSize.value"
+                    :marked="isMarkedTarget(i - 1, j - 1)"
+                    @click="hit(i - 1, j - 1)"
+                ></AimTarget>
+            </div>
         </div>
-    </div>
-    <div v-show="!gameStatus.isGaming && gameStatus.score !== 0">
-        スコア：{{gameStatus.score}}
+        <div v-show="!gameStatus.isGaming.value && gameStatus.score.value !== 0">
+            スコア：{{gameStatus.score.value}}
+        </div>
     </div>
 </template>
 

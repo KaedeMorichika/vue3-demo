@@ -37,5 +37,13 @@ export default {
 </script>
 
 <style scoped>
-
+.target {
+    border: 1px solid black;
+}
+.target button {
+    background-color: white;
+}
+.target button.marked {
+    background-color: crimson;
+}
 </style>
