@@ -14,11 +14,23 @@ export const useGameSetting = () => {
     // Options APIでいう computed
     const bindRowNum = computed({
         get: () => setting.rowNum.value.toString(),
-        set: (val) => setting.rowNum.value = parseInt(val)
+        set: (val) => {
+            if (parseInt(val) > 1) {
+                setting.rowNum.value = parseInt(val)
+            } else {
+                setting.rowNum.value = 1
+            }
+        }
     })
     const bindColumnNum = computed({
         get: () => setting.columnNum.value.toString(),
-        set: (val) => setting.columnNum.value = parseInt(val)
+        set: (val) => {
+            if (parseInt(val) > 1) {
+                setting.columnNum.value = parseInt(val)
+            } else {
+                setting.columnNum.value = 1
+            }
+        }
     })
     return {setting, bindRowNum, bindColumnNum}
 }
